@@ -1,0 +1,1004 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Placement Preparation Portal</title>
+
+<style>
+:root {
+  --navy: #10213d;
+  --blue: #2563eb;
+  --cyan: #22c1c3;
+  --bg: #f4f7fc;
+  --white: #fff;
+  --text: #1e293b;
+  --muted: #64748b;
+  --border: #e2e8f0;
+  --green: #15803d;
+  --red: #b91c1c;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+}
+button {
+  padding: 10px 16px;
+  border: 0;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+  transition: .2s;
+}
+button:hover { opacity: .88; }
+button:focus-visible {
+  outline: 3px solid var(--cyan);
+  outline-offset: 3px;
+}
+header {
+  background: var(--navy);
+  color: white;
+  padding: 15px 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+.brand {
+  font-size: 20px;
+  font-weight: bold;
+}
+.brand span {
+  display: inline-block;
+  background: var(--cyan);
+  color: var(--navy);
+  padding: 4px 10px;
+  border-radius: 7px;
+  margin-right: 7px;
+}
+nav { display: flex; flex-wrap: wrap; gap: 5px; }
+nav button { background: transparent; color: white; }
+nav button:hover { background: #263852; }
+.container {
+  width: min(1100px, 92%);
+  margin: 30px auto 55px;
+  min-height: 65vh;
+}
+.page { display: none; }
+.page.active { display: block; }
+.hero {
+  padding: 42px;
+  border-radius: 18px;
+  color: white;
+  background: linear-gradient(125deg, #10213d, #164e8a);
+  margin-bottom: 30px;
+}
+.hero h1 { font-size: clamp(30px, 5vw, 45px); }
+.hero p { color: #dbeafe; }
+.eyebrow {
+  color: var(--blue);
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 1.4px;
+}
+.hero .eyebrow { color: #67e8f9; }
+h1 { line-height: 1.25; }
+.muted { color: var(--muted); }
+.primary { background: var(--blue); color: white; }
+.hero .primary { background: var(--cyan); color: var(--navy); }
+.secondary { background: #e8eef8; color: var(--navy); }
+.danger { color: var(--red); }
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  margin: 20px 0 30px;
+}
+.card, .panel, .stat-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 22px;
+  box-shadow: 0 4px 15px #10213d08;
+}
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.card p { color: var(--muted); flex: 1; }
+.card button { background: #eaf1ff; color: var(--blue); }
+.card-icon { font-size: 30px; }
+.section-heading, .quiz-top, .quiz-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.text-button { background: transparent; color: var(--blue); }
+.hidden { display: none !important; }
+.progress-track {
+  height: 8px;
+  background: var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 18px 0;
+}
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--blue), var(--cyan));
+  width: 0;
+  transition: width .2s;
+}
+.options { display: grid; gap: 10px; margin: 20px 0; }
+.option {
+  text-align: left;
+  width: 100%;
+  background: #f8fafc;
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+.option.selected { background: #eaf1ff; border: 2px solid var(--blue); }
+.score-number { font-size: 48px; font-weight: bold; color: var(--blue); }
+.review-item { padding: 13px 0; border-top: 1px solid var(--border); }
+.good-text { color: var(--green); }
+.bad-text { color: var(--red); }
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  margin: 25px 0;
+}
+.stat-card span { display: block; color: var(--muted); }
+.stat-card strong { font-size: 30px; color: var(--blue); }
+.history-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+}
+.history-row:last-child { border-bottom: 0; }
+.topic-button {
+  display: block;
+  width: 100%;
+  text-align: left;
+  margin: 8px 0;
+  background: #f1f5f9;
+  color: var(--navy);
+}
+.answer-box {
+  background: #f1f5f9;
+  padding: 14px;
+  border-radius: 9px;
+  margin-top: 12px;
+}
+.interview-list { display: grid; gap: 15px; }
+footer {
+  background: var(--navy);
+  color: #cbd5e1;
+  text-align: center;
+  padding: 20px;
+  font-size: 13px;
+}
+@media (max-width: 760px) {
+  header { padding: 15px 4%; }
+  nav { width: 100%; }
+  nav button { padding: 8px; font-size: 12px; }
+  .cards, .stats-grid { grid-template-columns: 1fr; }
+  .hero { padding: 26px 20px; }
+  .card, .panel { padding: 17px; }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="brand"><span>P</span> Placement Portal</div>
+  <nav>
+    <button onclick="showPage('dashboard')">Home</button>
+    <button onclick="showPage('practice')">Aptitude</button>
+    <button onclick="showPage('technical')">Technical</button>
+    <button onclick="showPage('interview')">Interview</button>
+    <button onclick="showPage('progress')">Progress</button>
+  </nav>
+</header>
+
+<main class="container">
+
+<!-- DASHBOARD -->
+<section id="dashboard" class="page active">
+  <div class="hero">
+    <span class="eyebrow">YOUR CAREER STARTS HERE</span>
+    <h1>Welcome back, Student!</h1>
+    <p>Practise regularly. Improve your skills. Prepare for placements.</p>
+    <button class="primary" onclick="showPage('practice')">Start Practising →</button>
+  </div>
+
+  <h2>Choose Your Preparation Path</h2>
+  <div class="cards">
+    <article class="card">
+      <div class="card-icon">🧠</div>
+      <h3>Aptitude Practice</h3>
+      <p>Mathematics, reasoning and verbal ability.</p>
+      <button onclick="showPage('practice')">Start Practice</button>
+    </article>
+    <article class="card">
+      <div class="card-icon">💻</div>
+      <h3>Technical Preparation</h3>
+      <p>HTML, CSS, JavaScript, OOP and DBMS.</p>
+      <button onclick="showPage('technical')">Explore Topics</button>
+    </article>
+    <article class="card">
+      <div class="card-icon">🎯</div>
+      <h3>Interview Corner</h3>
+      <p>Common HR and technical interview questions.</p>
+      <button onclick="showPage('interview')">Prepare Now</button>
+    </article>
+  </div>
+
+  <div class="section-heading">
+    <h2>Recent Practice</h2>
+    <button class="text-button" onclick="showPage('progress')">View All →</button>
+  </div>
+  <div id="recentScores" class="panel"></div>
+</section>
+
+<!-- APTITUDE AND QUIZ -->
+<section id="practice" class="page">
+  <span class="eyebrow">TEST YOUR KNOWLEDGE</span>
+  <h1>Aptitude Practice</h1>
+  <p class="muted">Choose a topic and answer the questions.</p>
+
+  <div class="cards">
+    <article class="card">
+      <div class="card-icon">➗</div>
+      <h3>Quantitative Aptitude</h3>
+      <p>Percentages, ratios, averages and speed.</p>
+      <button onclick="startQuiz('aptitude')">Start Quiz</button>
+    </article>
+    <article class="card">
+      <div class="card-icon">🔍</div>
+      <h3>Logical Reasoning</h3>
+      <p>Patterns, sequences and logical thinking.</p>
+      <button onclick="startQuiz('reasoning')">Start Quiz</button>
+    </article>
+    <article class="card">
+      <div class="card-icon">📚</div>
+      <h3>Verbal Ability</h3>
+      <p>English grammar, vocabulary and synonyms.</p>
+      <button onclick="startQuiz('verbal')">Start Quiz</button>
+    </article>
+  </div>
+
+  <div id="quizArea" class="panel hidden">
+    <div class="quiz-top">
+      <span id="quizCategory" class="eyebrow"></span>
+      <span id="questionCount" class="muted"></span>
+    </div>
+    <div class="progress-track"><div id="quizProgress" class="progress-fill"></div></div>
+    <h2 id="questionText"></h2>
+    <div id="options" class="options"></div>
+    <p id="quizMessage" class="muted" aria-live="polite"></p>
+    <div class="quiz-actions">
+      <button class="secondary" onclick="exitQuiz()">Exit Quiz</button>
+      <button id="nextButton" class="primary" onclick="nextQuestion()">Next Question →</button>
+    </div>
+  </div>
+
+  <div id="resultArea" class="panel hidden">
+    <span class="eyebrow">QUIZ COMPLETED</span>
+    <h2>Your Result</h2>
+    <div id="scorePercent" class="score-number">0%</div>
+    <p id="scoreSummary"></p>
+    <div id="answerReview"></div>
+    <div class="quiz-actions">
+      <button class="secondary" onclick="showPage('progress')">View Progress</button>
+      <button class="primary" onclick="startQuiz(lastCategory)">Try Again</button>
+    </div>
+  </div>
+</section>
+
+<!-- TECHNICAL PREPARATION -->
+<section id="technical" class="page">
+  <span class="eyebrow">BUILD YOUR KNOWLEDGE</span>
+  <h1>Technical Preparation</h1>
+  <p class="muted">Select a topic to revise important concepts.</p>
+  <div id="technicalTopics" class="cards"></div>
+  <div id="topicDetails" class="panel hidden"></div>
+  <button class="primary" onclick="startQuiz('technical')">Take Technical Quiz</button>
+</section>
+
+<!-- INTERVIEW -->
+<section id="interview" class="page">
+  <span class="eyebrow">BE INTERVIEW READY</span>
+  <h1>Interview Corner</h1>
+  <p class="muted">Click a question to view its sample answer.</p>
+  <div id="interviewList" class="interview-list"></div>
+</section>
+
+<!-- PROGRESS -->
+<section id="progress" class="page">
+  <span class="eyebrow">TRACK YOUR LEARNING</span>
+  <h1>My Progress</h1>
+  <div class="stats-grid">
+    <div class="stat-card"><span>Total Attempts</span><strong id="totalAttempts">0</strong></div>
+    <div class="stat-card"><span>Average Score</span><strong id="averageScore">0%</strong></div>
+    <div class="stat-card"><span>Best Score</span><strong id="bestScore">0%</strong></div>
+  </div>
+  <h2>Practice History</h2>
+  <div id="historyList" class="panel"></div>
+  <button class="secondary danger" onclick="clearProgress()">Clear Saved Progress</button>
+</section>
+
+</main>
+
+<footer>
+  <p>© 2026 Placement Preparation Portal</p>
+  <p>Built with HTML, CSS and JavaScript | Front-end educational project</p>
+</footer>
+
+<script>
+// ---------------- QUIZ QUESTIONS ----------------
+
+const quizData = {
+  aptitude: [
+    {
+      q: "A number is increased by 20%. If the original number is 100, what is the new number?",
+      options: ["110", "120", "125", "140"],
+      answer: 1,
+      explanation: "20% of 100 is 20. New number = 100 + 20 = 120."
+    },
+    {
+      q: "The ratio of two numbers is 2:3. Their sum is 25. Find the smaller number.",
+      options: ["5", "10", "15", "20"],
+      answer: 1,
+      explanation: "Total parts = 5. One part = 25/5 = 5. Smaller number = 2 × 5 = 10."
+    },
+    {
+      q: "What is the average of 10, 20 and 30?",
+      options: ["15", "20", "25", "30"],
+      answer: 1,
+      explanation: "Average = (10 + 20 + 30)/3 = 20."
+    },
+    {
+      q: "A product costs ₹500. Its price is reduced by 10%. What is the new price?",
+      options: ["₹400", "₹450", "₹475", "₹490"],
+      answer: 1,
+      explanation: "10% of ₹500 is ₹50. New price = ₹500 - ₹50 = ₹450."
+    },
+    {
+      q: "A person travels 120 km in 3 hours. Find the average speed.",
+      options: ["30 km/h", "40 km/h", "50 km/h", "60 km/h"],
+      answer: 1,
+      explanation: "Speed = Distance / Time = 120/3 = 40 km/h."
+    }
+  ],
+
+  reasoning: [
+    {
+      q: "Find the next number: 2, 4, 6, 8, ?",
+      options: ["9", "10", "12", "14"],
+      answer: 1,
+      explanation: "Every number increases by 2. The next number is 10."
+    },
+    {
+      q: "Find the odd one out.",
+      options: ["Apple", "Mango", "Banana", "Carrot"],
+      answer: 3,
+      explanation: "Carrot is commonly classified as a vegetable; the others are fruits."
+    },
+    {
+      q: "If CAT is coded as DBU by moving each letter forward, DOG becomes:",
+      options: ["EPH", "EOG", "FPH", "DPH"],
+      answer: 0,
+      explanation: "D becomes E, O becomes P and G becomes H."
+    },
+    {
+      q: "Which direction is opposite to North?",
+      options: ["East", "West", "South", "North-East"],
+      answer: 2,
+      explanation: "South is opposite to North."
+    },
+    {
+      q: "Find the next letter: A, C, E, G, ?",
+      options: ["H", "I", "J", "K"],
+      answer: 1,
+      explanation: "The sequence skips one letter each time. The next letter is I."
+    }
+  ],
+
+  verbal: [
+    {
+      q: "Choose a synonym of 'Rapid'.",
+      options: ["Slow", "Fast", "Weak", "Quiet"],
+      answer: 1,
+      explanation: "Rapid means fast or quick."
+    },
+    {
+      q: "Choose the grammatically correct sentence.",
+      options: [
+        "She go to college.",
+        "She going college.",
+        "She goes to college.",
+        "She gone to college."
+      ],
+      answer: 2,
+      explanation: "In the simple present tense, use 'goes' with 'she'."
+    },
+    {
+      q: "Choose the opposite of 'Expand'.",
+      options: ["Increase", "Enlarge", "Contract", "Extend"],
+      answer: 2,
+      explanation: "Contract means to become smaller or reduce in size."
+    },
+    {
+      q: "Fill in the blank: He is interested ___ programming.",
+      options: ["on", "at", "in", "for"],
+      answer: 2,
+      explanation: "The correct expression is 'interested in'."
+    },
+    {
+      q: "What does 'Concise' mean?",
+      options: [
+        "Confusing",
+        "Brief and clear",
+        "Extremely long",
+        "Incorrect"
+      ],
+      answer: 1,
+      explanation: "Concise means expressing something clearly in few words."
+    }
+  ],
+
+  technical: [
+    {
+      q: "Which HTML tag creates a hyperlink?",
+      options: ["<link>", "<a>", "<href>", "<url>"],
+      answer: 1,
+      explanation: "The anchor tag <a> creates hyperlinks."
+    },
+    {
+      q: "Which CSS property changes text colour?",
+      options: ["font-style", "background", "color", "text-size"],
+      answer: 2,
+      explanation: "The CSS color property sets text colour."
+    },
+    {
+      q: "Which JavaScript keyword declares a reassignable block-scoped variable?",
+      options: ["const", "let", "static", "define"],
+      answer: 1,
+      explanation: "let declares a block-scoped variable that can be reassigned."
+    },
+    {
+      q: "What is the purpose of a primary key in DBMS?",
+      options: [
+        "Style a table",
+        "Uniquely identify a row",
+        "Delete every row",
+        "Create a webpage"
+      ],
+      answer: 1,
+      explanation: "A primary key uniquely identifies a record in a table."
+    },
+    {
+      q: "Which OOP concept allows a class to acquire features of another class?",
+      options: ["Inheritance", "Compilation", "Iteration", "Sorting"],
+      answer: 0,
+      explanation: "Inheritance allows a class to acquire members from another class."
+    }
+  ]
+};
+
+// ---------------- TECHNICAL NOTES ----------------
+
+const technicalTopics = [
+  {
+    title: "HTML",
+    description: "HTML creates the structure of a webpage.",
+    points: [
+      "HTML stands for HyperText Markup Language.",
+      "Common tags: h1, p, a, img and div.",
+      "Forms collect information from users.",
+      "Semantic tags include header, nav, main and footer."
+    ]
+  },
+  {
+    title: "CSS",
+    description: "CSS controls the design and layout of webpages.",
+    points: [
+      "CSS stands for Cascading Style Sheets.",
+      "Selectors target HTML elements.",
+      "Flexbox and Grid create page layouts.",
+      "Media queries support responsive design."
+    ]
+  },
+  {
+    title: "JavaScript",
+    description: "JavaScript adds behaviour and interactivity.",
+    points: [
+      "Variables can be declared with let and const.",
+      "Functions contain reusable instructions.",
+      "Events respond to user actions.",
+      "The DOM allows JavaScript to update webpage content."
+    ]
+  },
+  {
+    title: "OOP",
+    description: "Object-oriented programming organizes code using classes and objects.",
+    points: [
+      "Class: a blueprint for creating objects.",
+      "Object: an instance of a class.",
+      "Inheritance: reusing features of another class.",
+      "Encapsulation: combining data and methods.",
+      "Polymorphism: one interface with different implementations."
+    ]
+  },
+  {
+    title: "DBMS",
+    description: "A DBMS stores, organizes and retrieves data.",
+    points: [
+      "Tables contain rows and columns.",
+      "A primary key uniquely identifies a record.",
+      "SQL is used to query relational databases.",
+      "Normalization helps reduce data redundancy."
+    ]
+  },
+  {
+    title: "Web Development",
+    description: "Web development creates websites and web applications.",
+    points: [
+      "Frontend is the part users interact with.",
+      "Backend handles server-side processing.",
+      "HTTP supports communication between clients and servers.",
+      "Responsive design adapts to different screen sizes."
+    ]
+  }
+];
+
+// ---------------- INTERVIEW QUESTIONS ----------------
+
+const interviewQuestions = [
+  {
+    category: "HR Interview",
+    q: "Tell me about yourself.",
+    answer: "Introduce your education, technical skills, projects and career goal. Keep your answer relevant and concise."
+  },
+  {
+    category: "HR Interview",
+    q: "What are your strengths?",
+    answer: "Mention genuine strengths such as problem-solving, teamwork or willingness to learn. Give a real example."
+  },
+  {
+    category: "HR Interview",
+    q: "Why should we hire you?",
+    answer: "Explain how your skills, learning attitude and ability to contribute match the role."
+  },
+  {
+    category: "Technical Interview",
+    q: "What is the difference between HTML, CSS and JavaScript?",
+    answer: "HTML creates the structure, CSS controls appearance, and JavaScript adds behaviour and interactivity."
+  },
+  {
+    category: "Technical Interview",
+    q: "What is LocalStorage?",
+    answer: "LocalStorage stores key-value data in a browser. The data can remain after a page refresh."
+  },
+  {
+    category: "Technical Interview",
+    q: "What is responsive web design?",
+    answer: "Responsive design adapts a website to different screen sizes using flexible layouts and CSS media queries."
+  }
+];
+
+// ---------------- APPLICATION LOGIC ----------------
+
+let currentQuiz = [];
+let currentIndex = 0;
+let selectedAnswers = [];
+let lastCategory = "aptitude";
+
+function getHistory() {
+  try {
+    const data = JSON.parse(
+      localStorage.getItem("placementPortalHistory") || "[]"
+    );
+    return Array.isArray(data) ? data : [];
+  } catch (error) {
+    return [];
+  }
+}
+
+function saveHistory(history) {
+  try {
+    localStorage.setItem(
+      "placementPortalHistory",
+      JSON.stringify(history)
+    );
+    return true;
+  } catch (error) {
+    alert("Progress could not be saved in this browser.");
+    return false;
+  }
+}
+
+function showPage(id) {
+  document.querySelectorAll(".page").forEach(page => {
+    page.classList.remove("active");
+  });
+
+  document.getElementById(id).classList.add("active");
+
+  if (id === "dashboard") renderRecentScores();
+  if (id === "progress") renderProgress();
+
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function startQuiz(category) {
+  if (!quizData[category]) return;
+
+  lastCategory = category;
+  currentQuiz = quizData[category];
+  currentIndex = 0;
+  selectedAnswers = [];
+
+  document.getElementById("quizCategory").textContent =
+    category.toUpperCase() + " PRACTICE";
+
+  document.getElementById("quizArea").classList.remove("hidden");
+  document.getElementById("resultArea").classList.add("hidden");
+
+  showPage("practice");
+  renderQuestion();
+
+  document.getElementById("quizArea").scrollIntoView({
+    behavior: "smooth",
+    block: "start"
+  });
+}
+
+function renderQuestion() {
+  const question = currentQuiz[currentIndex];
+
+  document.getElementById("questionCount").textContent =
+    `Question ${currentIndex + 1} of ${currentQuiz.length}`;
+
+  document.getElementById("questionText").textContent = question.q;
+
+  document.getElementById("quizProgress").style.width =
+    `${((currentIndex + 1) / currentQuiz.length) * 100}%`;
+
+  document.getElementById("quizMessage").textContent = "";
+
+  const container = document.getElementById("options");
+  container.replaceChildren();
+
+  question.options.forEach((option, index) => {
+    const button = document.createElement("button");
+    button.className = "option";
+    button.textContent =
+      `${String.fromCharCode(65 + index)}. ${option}`;
+    button.setAttribute("aria-pressed", "false");
+
+    if (selectedAnswers[currentIndex] === index) {
+      button.classList.add("selected");
+      button.setAttribute("aria-pressed", "true");
+    }
+
+    button.addEventListener("click", () => selectOption(index));
+    container.appendChild(button);
+  });
+
+  document.getElementById("nextButton").textContent =
+    currentIndex === currentQuiz.length - 1
+      ? "Submit Quiz"
+      : "Next Question →";
+}
+
+function selectOption(index) {
+  selectedAnswers[currentIndex] = index;
+
+  document.querySelectorAll("#options .option").forEach(
+    (button, i) => {
+      button.classList.toggle("selected", i === index);
+      button.setAttribute("aria-pressed", String(i === index));
+    }
+  );
+
+  document.getElementById("quizMessage").textContent =
+    "Answer selected. Continue when ready.";
+}
+
+function nextQuestion() {
+  if (selectedAnswers[currentIndex] === undefined) {
+    document.getElementById("quizMessage").textContent =
+      "Please select an answer before continuing.";
+    return;
+  }
+
+  if (currentIndex < currentQuiz.length - 1) {
+    currentIndex++;
+    renderQuestion();
+  } else {
+    finishQuiz();
+  }
+}
+
+function finishQuiz() {
+  const correct = currentQuiz.reduce((total, question, index) => {
+    return total + (
+      selectedAnswers[index] === question.answer ? 1 : 0
+    );
+  }, 0);
+
+  const percentage = Math.round(
+    (correct / currentQuiz.length) * 100
+  );
+
+  const attempt = {
+    category: lastCategory,
+    correct: correct,
+    total: currentQuiz.length,
+    percentage: percentage,
+    date: new Date().toLocaleString()
+  };
+
+  const history = getHistory();
+  history.unshift(attempt);
+  saveHistory(history.slice(0, 100));
+
+  document.getElementById("quizArea").classList.add("hidden");
+  document.getElementById("resultArea").classList.remove("hidden");
+  document.getElementById("scorePercent").textContent =
+    percentage + "%";
+
+  document.getElementById("scoreSummary").textContent =
+    `${correct} correct out of ${currentQuiz.length}. ` +
+    `${currentQuiz.length - correct} incorrect.`;
+
+  const review = document.getElementById("answerReview");
+  review.replaceChildren();
+
+  currentQuiz.forEach((question, index) => {
+    const isCorrect = selectedAnswers[index] === question.answer;
+    const item = document.createElement("div");
+    item.className = "review-item";
+
+    const heading = document.createElement("h3");
+    heading.textContent = `${index + 1}. ${question.q}`;
+
+    const result = document.createElement("p");
+    result.className = isCorrect ? "good-text" : "bad-text";
+    result.textContent = isCorrect
+      ? "Your answer is correct."
+      : `Your answer: ${
+          selectedAnswers[index] === undefined
+            ? "Not answered"
+            : question.options[selectedAnswers[index]]
+        }`;
+
+    const answer = document.createElement("p");
+    answer.textContent =
+      "Correct answer: " + question.options[question.answer];
+
+    const explanation = document.createElement("p");
+    explanation.className = "muted";
+    explanation.textContent = question.explanation;
+
+    item.append(heading, result, answer, explanation);
+    review.appendChild(item);
+  });
+
+  renderProgress();
+}
+
+function exitQuiz() {
+  document.getElementById("quizArea").classList.add("hidden");
+  document.getElementById("resultArea").classList.add("hidden");
+  showPage("practice");
+}
+
+// ---------------- TECHNICAL TOPICS ----------------
+
+function renderTechnicalTopics() {
+  const container = document.getElementById("technicalTopics");
+  container.replaceChildren();
+
+  technicalTopics.forEach((topic, index) => {
+    const card = document.createElement("article");
+    card.className = "card";
+
+    const heading = document.createElement("h3");
+    heading.textContent = topic.title;
+
+    const description = document.createElement("p");
+    description.textContent = topic.description;
+
+    const button = document.createElement("button");
+    button.textContent = "Read Notes";
+    button.addEventListener("click", () => showTopic(index));
+
+    card.append(heading, description, button);
+    container.appendChild(card);
+  });
+}
+
+function showTopic(index) {
+  const topic = technicalTopics[index];
+  const container = document.getElementById("topicDetails");
+  container.replaceChildren();
+
+  const heading = document.createElement("h2");
+  heading.textContent = topic.title;
+
+  const description = document.createElement("p");
+  description.textContent = topic.description;
+
+  const list = document.createElement("ul");
+
+  topic.points.forEach(point => {
+    const li = document.createElement("li");
+    li.textContent = point;
+    list.appendChild(li);
+  });
+
+  container.append(heading, description, list);
+  container.classList.remove("hidden");
+  container.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+// ---------------- INTERVIEW CORNER ----------------
+
+function renderInterviewQuestions() {
+  const container = document.getElementById("interviewList");
+  container.replaceChildren();
+
+  interviewQuestions.forEach(item => {
+    const card = document.createElement("article");
+    card.className = "panel";
+
+    const category = document.createElement("span");
+    category.className = "eyebrow";
+    category.textContent = item.category;
+
+    const question = document.createElement("h3");
+    question.textContent = item.q;
+
+    const button = document.createElement("button");
+    button.className = "secondary";
+    button.textContent = "Show Sample Answer";
+    button.setAttribute("aria-expanded", "false");
+
+    const answer = document.createElement("p");
+    answer.className = "answer-box hidden";
+    answer.textContent = item.answer;
+
+    button.addEventListener("click", () => {
+      const hidden = answer.classList.toggle("hidden");
+      button.textContent = hidden
+        ? "Show Sample Answer"
+        : "Hide Sample Answer";
+      button.setAttribute("aria-expanded", String(!hidden));
+    });
+
+    card.append(category, question, button, answer);
+    container.appendChild(card);
+  });
+}
+
+// ---------------- PROGRESS AND HISTORY ----------------
+
+function renderRecentScores() {
+  const container = document.getElementById("recentScores");
+  container.replaceChildren();
+
+  const history = getHistory().slice(0, 3);
+
+  if (history.length === 0) {
+    container.textContent =
+      "No practice attempts yet. Start a quiz to see your scores.";
+    return;
+  }
+
+  history.forEach(attempt => {
+    const row = document.createElement("div");
+    row.className = "history-row";
+
+    const title = document.createElement("span");
+    title.textContent = attempt.category.toUpperCase();
+
+    const score = document.createElement("strong");
+    score.textContent =
+      `${attempt.correct}/${attempt.total} · ${attempt.percentage}%`;
+
+    row.append(title, score);
+    container.appendChild(row);
+  });
+}
+
+function renderProgress() {
+  const history = getHistory();
+
+  document.getElementById("totalAttempts").textContent = history.length;
+
+  const average = history.length
+    ? Math.round(
+        history.reduce((sum, item) => sum + item.percentage, 0) /
+        history.length
+      )
+    : 0;
+
+  const best = history.length
+    ? Math.max(...history.map(item => item.percentage))
+    : 0;
+
+  document.getElementById("averageScore").textContent = average + "%";
+  document.getElementById("bestScore").textContent = best + "%";
+
+  const container = document.getElementById("historyList");
+  container.replaceChildren();
+
+  if (history.length === 0) {
+    container.textContent =
+      "Your practice history will appear here after your first quiz.";
+    return;
+  }
+
+  history.forEach(attempt => {
+    const row = document.createElement("div");
+    row.className = "history-row";
+
+    const info = document.createElement("div");
+    const category = document.createElement("strong");
+    category.textContent = attempt.category.toUpperCase();
+
+    const date = document.createElement("div");
+    date.className = "muted";
+    date.textContent = attempt.date;
+
+    info.append(category, date);
+
+    const score = document.createElement("strong");
+    score.textContent =
+      `${attempt.correct}/${attempt.total} (${attempt.percentage}%)`;
+
+    row.append(info, score);
+    container.appendChild(row);
+  });
+}
+
+function clearProgress() {
+  if (!confirm("Clear all saved quiz history from this browser?")) {
+    return;
+  }
+
+  try {
+    localStorage.removeItem("placementPortalHistory");
+    renderProgress();
+    renderRecentScores();
+  } catch (error) {
+    alert("Saved progress could not be cleared.");
+  }
+}
+
+// ---------------- INITIALIZE WEBSITE ----------------
+
+renderTechnicalTopics();
+renderInterviewQuestions();
+renderRecentScores();
+renderProgress();
+</script>
+
+</body>
+</html>
